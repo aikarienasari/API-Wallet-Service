@@ -14,12 +14,9 @@ exports.createUser = async (req, res) => {
         // Tambahkan debugging
         console.log("Raw User ID from database:", result.insertId);
 
-        // Format agar 8 digit
-        const formattedUserId = result.insertId.toString().padStart(8, '0');
+        console.log("User ID from db:", result.insertId); 
 
-        console.log("Formatted User ID:", formattedUserId); // Cek apakah benar jadi 8 digit
-
-        res.json({ message: "User created successfully", userID: formattedUserId });
+        res.json({ message: "User created successfully", userID: result.insertId });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
