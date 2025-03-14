@@ -6,8 +6,8 @@ router.post("/deposit", transactionController.deposit);
 router.post("/withdrawal", transactionController.withdrawal);
 router.get("/", transactionController.getTransactions);
 router.get("/:id", transactionController.getTransactionById);
-router.put("/:id", transactionController.updateTransaction); // ✅ Update transaction
-router.delete("/:id", transactionController.deleteTransaction); // ✅ Delete transaction
+router.put("/:id", transactionController.updateTransaction); 
+router.delete("/:id", transactionController.deleteTransaction); 
 
 module.exports = router;
 

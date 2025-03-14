@@ -1,8 +1,8 @@
 const pool = require("../config/db");
 
-// ✅ GET all wallets atau filter berdasarkan userID
+// GET all wallets atau filter berdasarkan userID
 exports.getWallets = async (req, res) => {
-    console.log("✅ Handler getWallets dipanggil");
+    console.log("Handler getWallets dipanggil");
 
     try {
         const { userID } = req.query;
@@ -14,19 +14,19 @@ exports.getWallets = async (req, res) => {
             params.push(userID);
         }
 
-        console.log("🔍 Menjalankan query:", query, "dengan params:", params);
+        console.log("Menjalankan query:", query, "dengan params:", params);
 
         const [results] = await pool.query(query, params);
 
-        console.log("✅ Query berhasil, hasil:", results);
+        console.log("Query berhasil, hasil:", results);
         res.json({ wallets: results });
     } catch (err) {
-        console.error("❌ Error dalam query database:", err);
+        console.error("Error dalam query database:", err);
         res.status(500).json({ message: "Error fetching wallets", error: err });
     }
 };
 
-// ✅ GET wallet by ID
+// GET wallet by ID
 exports.getWalletById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -38,12 +38,12 @@ exports.getWalletById = async (req, res) => {
 
         res.json({ wallet: results[0] });
     } catch (err) {
-        console.error("❌ Error fetching wallet:", err);
+        console.error("Error fetching wallet:", err);
         res.status(500).json({ message: "Error fetching wallet", error: err });
     }
 };
 
-// ✅ CREATE wallet (Tambahkan validasi userID)
+// CREATE wallet (Tambahkan validasi userID)
 exports.createWallet = async (req, res) => {
     try {
         const { userID, balance } = req.body;
@@ -64,12 +64,12 @@ exports.createWallet = async (req, res) => {
 
         res.status(201).json({ message: "Wallet created successfully", walletID: result.insertId });
     } catch (err) {
-        console.error("❌ Error creating wallet:", err);
+        console.error("Error creating wallet:", err);
         res.status(500).json({ message: "Error creating wallet", error: err });
     }
 };
 
-// ✅ UPDATE wallet (Perbaiki query dan validasi balance)
+// UPDATE wallet (Perbaiki query dan validasi balance)
 exports.updateWallet = async (req, res) => {
     try {
         const { id } = req.params;
@@ -87,12 +87,12 @@ exports.updateWallet = async (req, res) => {
 
         res.json({ message: "Wallet updated successfully" });
     } catch (err) {
-        console.error("❌ Error updating wallet:", err);
+        console.error("Error updating wallet:", err);
         res.status(500).json({ message: "Error updating wallet", error: err });
     }
 };
 
-// ✅ DELETE wallet (Perbaiki query dan cek transaksi sebelum delete)
+// DELETE wallet (Perbaiki query dan cek transaksi sebelum delete)
 exports.deleteWallet = async (req, res) => {
     try {
         const { id } = req.params;
@@ -111,7 +111,7 @@ exports.deleteWallet = async (req, res) => {
 
         res.json({ message: "Wallet deleted successfully" });
     } catch (err) {
-        console.error("❌ Error deleting wallet:", err);
+        console.error("Error deleting wallet:", err);
         res.status(500).json({ message: "Error deleting wallet", error: err });
     }
 };

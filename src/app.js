@@ -16,11 +16,11 @@ app.use((req, res, next) => {
 });
 
 // Cek apakah .env terbaca dengan benar
-console.log("🚀 Server sedang berjalan dengan konfigurasi:");
-console.log("🔹 DB_HOST:", process.env.DB_HOST);
-console.log("🔹 DB_USER:", process.env.DB_USER);
-console.log("🔹 DB_NAME:", process.env.DB_NAME);
-console.log("🔹 PORT:", process.env.PORT || 5000);
+console.log("Server sedang berjalan dengan konfigurasi:");
+console.log("DB_HOST:", process.env.DB_HOST);
+console.log("DB_USER:", process.env.DB_USER);
+console.log("DB_NAME:", process.env.DB_NAME);
+console.log("PORT:", process.env.PORT || 5000);
 
 // Routes
 app.use("/api/transactions", require("./routes/transactionRoutes"));
@@ -30,7 +30,7 @@ app.use("/api/wallets", require("./routes/walletRoutes"));
 
 // Middleware Global untuk Menangani Error
 app.use((err, req, res, next) => {
-    console.error("❌ ERROR:", err.stack);
+    console.error("ERROR:", err.stack);
     res.status(500).json({ message: "Terjadi kesalahan pada server", error: err.message });
 });
 

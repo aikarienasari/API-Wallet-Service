@@ -1,7 +1,7 @@
 const db = require("../config/db");
 const bcrypt = require("bcrypt");
 
-// ✅ USER BARU (REGISTER)
+// USER BARU (REGISTER)
 exports.createUser = async (req, res) => {
     try {
         const { email, password, firstName, lastName, phoneNumber } = req.body;
@@ -56,7 +56,7 @@ exports.createUser = async (req, res) => {
     }
 };
 
-// ✅ LIST SEMUA USER
+// LIST SEMUA USER
 exports.getUsers = async (req, res) => {
     try {
         const [users] = await db.query(
@@ -71,7 +71,7 @@ exports.getUsers = async (req, res) => {
     }
 };
 
-// ✅ GET USER BERDASARKAN ID
+// GET USER BERDASARKAN ID
 exports.getUserById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -93,7 +93,7 @@ exports.getUserById = async (req, res) => {
     }
 };
 
-// ✅ UPDATE USER
+// UPDATE USER
 exports.updateUser = async (req, res) => {
     try {
         const { id } = req.params;
@@ -130,7 +130,7 @@ exports.updateUser = async (req, res) => {
     }
 };
 
-// ✅ DELETE USER
+// DELETE USER
 exports.deleteUser = async (req, res) => {
     const { id } = req.params;
     const connection = await db.getConnection();

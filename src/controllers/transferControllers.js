@@ -1,6 +1,6 @@
 const db = require("../config/db");
 
-// ✅ GET Semua Transfer
+// GET Semua Transfer
 exports.getTransfers = async (req, res) => {
     try {
         const [transfers] = await db.execute(`
@@ -14,12 +14,12 @@ exports.getTransfers = async (req, res) => {
 
         res.json({ transfers });
     } catch (error) {
-        console.error("❌ Error fetching transfers:", error.message);
+        console.error("Error fetching transfers:", error.message);
         res.status(500).json({ error: "Terjadi kesalahan saat mengambil data transfer" });
     }
 };
 
-// ✅ GET Transfer Berdasarkan ID
+// GET Transfer Berdasarkan ID
 exports.getTransferById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -40,12 +40,12 @@ exports.getTransferById = async (req, res) => {
 
         res.json({ transfer: transfer[0] });
     } catch (error) {
-        console.error("❌ Error fetching transfer:", error.message);
+        console.error("Error fetching transfer:", error.message);
         res.status(500).json({ error: "Terjadi kesalahan saat mengambil data transfer" });
     }
 };
 
-// ✅ GET Semua Transfer Berdasarkan userID
+// GET Semua Transfer Berdasarkan userID
 exports.getTransfersByUser = async (req, res) => {
     try {
         const { userID } = req.params;
@@ -62,12 +62,12 @@ exports.getTransfersByUser = async (req, res) => {
 
         res.json({ transfers });
     } catch (error) {
-        console.error("❌ Error fetching transfers by userID:", error.message);
+        console.error("Error fetching transfers by userID:", error.message);
         res.status(500).json({ error: "Terjadi kesalahan saat mengambil data transfer berdasarkan userID" });
     }
 };
 
-// ✅ POST Transfer (Fix: Validasi dan Error Handling Lebih Baik)
+// POST Transfer (Fix: Validasi dan Error Handling Lebih Baik)
 exports.transfer = async (req, res) => {
     const { sourceWalletID, destinationWalletID, amount, currency } = req.body;
 
@@ -144,12 +144,12 @@ exports.transfer = async (req, res) => {
             await connection.rollback();
             connection.release();
         }
-        console.error("❌ Transfer error:", error.message);
+        console.error("Transfer error:", error.message);
         res.status(400).json({ error: error.message });
     }
 };
 
-// ✅ DELETE TRANSFER
+// DELETE TRANSFER
 exports.deleteTransfer = async (req, res) => {
     try {
         const { id } = req.params;
@@ -186,7 +186,7 @@ exports.deleteTransfer = async (req, res) => {
         res.json({ message: "Transfer berhasil dihapus!" });
 
     } catch (error) {
-        console.error("❌ Error deleting transfer:", error.message);
+        console.error("Error deleting transfer:", error.message);
         res.status(500).json({ message: "Terjadi kesalahan saat menghapus transfer", error: error.message });
     }
 };

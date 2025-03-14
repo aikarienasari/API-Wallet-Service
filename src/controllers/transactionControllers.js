@@ -1,17 +1,17 @@
 const pool = require("../config/db");
 
-// ✅ GET Semua Transaksi
+// GET Semua Transaksi
 exports.getTransactions = async (req, res) => {
     try {
         const [transactions] = await pool.query("SELECT * FROM TRANSACTIONS");
         res.json({ transactions });
     } catch (error) {
-        console.error("❌ Error fetching transactions:", error.message);
+        console.error("Error fetching transactions:", error.message);
         res.status(500).json({ message: "Terjadi kesalahan saat mengambil data transaksi", error: error.message });
     }
 };
 
-// ✅ GET Transaksi Berdasarkan ID
+// GET Transaksi Berdasarkan ID
 exports.getTransactionById = async (req, res) => {
     try {
         const { id } = req.params;
@@ -23,12 +23,12 @@ exports.getTransactionById = async (req, res) => {
 
         res.json({ transaction: transaction[0] });
     } catch (error) {
-        console.error("❌ Error fetching transaction:", error.message);
+        console.error("Error fetching transaction:", error.message);
         res.status(500).json({ message: "Terjadi kesalahan saat mengambil data transaksi", error: error.message });
     }
 };
 
-// ✅ UPDATE TRANSACTION
+// UPDATE Transaksi
 exports.updateTransaction = async (req, res) => {
     try {
         const { id } = req.params;
@@ -52,12 +52,12 @@ exports.updateTransaction = async (req, res) => {
         res.json({ message: "Transaksi berhasil diperbarui!" });
 
     } catch (error) {
-        console.error("❌ Error updating transaction:", error.message);
+        console.error("Error updating transaction:", error.message);
         res.status(500).json({ message: "Terjadi kesalahan saat memperbarui transaksi", error: error.message });
     }
 };
 
-// ✅ DELETE TRANSACTION
+// DELETE Transaksi
 exports.deleteTransaction = async (req, res) => {
     try {
         const { id } = req.params;
@@ -71,12 +71,12 @@ exports.deleteTransaction = async (req, res) => {
         res.json({ message: "Transaksi berhasil dihapus!" });
 
     } catch (error) {
-        console.error("❌ Error deleting transaction:", error.message);
+        console.error("Error deleting transaction:", error.message);
         res.status(500).json({ message: "Terjadi kesalahan saat menghapus transaksi", error: error.message });
     }
 };
 
-// ✅ DEPOSIT
+// DEPOSIT
 exports.deposit = async (req, res) => {
     const { walletID, amount, currency, description, referenceID } = req.body;
 
@@ -88,7 +88,7 @@ exports.deposit = async (req, res) => {
         const connection = await pool.getConnection();
         await connection.beginTransaction();
 
-        //Cek walletID di database
+        // Cek walletID di database
         const [wallet] = await connection.query(
             `SELECT walletID FROM WALLETS WHERE walletID = ?`,
             [walletID]
@@ -118,12 +118,12 @@ exports.deposit = async (req, res) => {
         res.json({ message: "Deposit successful" });
 
     } catch (error) {
-        console.error("❌ Deposit error:", error.message);
+        console.error("Deposit error:", error.message);
         res.status(500).json({ error: "Terjadi kesalahan saat deposit" });
     }
 };
 
-// ✅ WITHDRAWAL
+// WITHDRAWAL
 exports.withdrawal = async (req, res) => {
     const { walletID, amount, currency, description, referenceID } = req.body;
 
@@ -170,7 +170,7 @@ exports.withdrawal = async (req, res) => {
         res.json({ message: "Withdrawal successful" });
 
     } catch (error) {
-        console.error("❌ Withdrawal error:", error.message);
+        console.error("Withdrawal error:", error.message);
         res.status(500).json({ error: "Terjadi kesalahan saat withdrawal" });
     }
 };
